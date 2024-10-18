@@ -17,7 +17,7 @@ from sklearn.svm import SVC
 
 
 # Cargar el archivo CSV desde una ruta específica
-file_path = '/content/BBDD TA - BD.csv'
+file_path = 'BBDD TA - BD.csv'
 df = pd.read_csv(file_path, sep=',', header=0, index_col=0)
 
 # Imputación de valores faltantes
