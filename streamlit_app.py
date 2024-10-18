@@ -172,7 +172,7 @@ def entrenar_modelo(X, y):
     grid_search.fit(X_train, y_train)
 
     best_params = grid_search.best_params_
-    best_svm_model = SVC(**best_params, random_state=42)
+    best_svm_model = SVC(**best_params, random_state=42,probability=True)
     best_svm_model.fit(X_train, y_train)
 
     return best_svm_model, X_test, y_test
