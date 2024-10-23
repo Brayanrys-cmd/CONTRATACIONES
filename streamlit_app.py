@@ -238,9 +238,9 @@ modelo, X_test, y_test = entrenar_modelo(X, y)
 
 # Diccionario para mapear los nombres de las clases
 nombres_categorias = {
-    0: "Alto CVR",
-    1: "Bajo CVR",
-    2: "Medio CVR"
+    0: "Alto Cumplimiento",
+    1: "Bajo Cumplimiento",
+    2: "Medio Cumplimiento"
 }
 
 # Realizar la predicción
@@ -249,7 +249,7 @@ if st.sidebar.button("Realizar Predicción"):
     probabilidades = modelo.predict_proba(nuevo_dato)
 
     # Multiplicar las probabilidades por 100 para mostrarlas como porcentaje
-    probabilidades_porcentaje = range(probabilidades * 100,2)
+    probabilidades_porcentaje = (probabilidades * 100).round(2)
 
     # Crear un DataFrame para mostrar las probabilidades de cada clase
     probabilidades_df = pd.DataFrame(probabilidades_porcentaje, columns=[nombres_categorias[clase] for clase in modelo.classes_])
@@ -259,4 +259,4 @@ if st.sidebar.button("Realizar Predicción"):
     # Mostrar la categoría con la mayor probabilidad
     prediccion = modelo.predict(nuevo_dato)
     categoria_predicha = nombres_categorias[prediccion[0]]
-    st.write(f"La categoría de CVR estimada es: {categoria_predicha}")
+    st.write(f"La categoría de que el postulante cumpla su meta es: {categoria_predicha}")
