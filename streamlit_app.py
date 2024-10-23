@@ -251,16 +251,12 @@ if st.sidebar.button("Realizar Predicción"):
     # Multiplicar las probabilidades por 100 para mostrarlas como porcentaje
     probabilidades_porcentaje = probabilidades * 100
 
-    # Crear un DataFrame para mostrar las probabilidades de cada clase con formato porcentaje
+    # Crear un DataFrame para mostrar las probabilidades de cada clase
     probabilidades_df = pd.DataFrame(probabilidades_porcentaje, columns=[nombres_categorias[clase] for clase in modelo.classes_])
-    
-    # Formatear los resultados como porcentaje con 2 decimales
-    probabilidades_df = probabilidades_df.applymap(lambda x: f"{x:.2f}%")
-
     st.write("Probabilidades de cada categoría de CVR:")
     st.write(probabilidades_df)
 
     # Mostrar la categoría con la mayor probabilidad
     prediccion = modelo.predict(nuevo_dato)
     categoria_predicha = nombres_categorias[prediccion[0]]
-    st.write(f"La categoría de CVR estimada es: {categoria_predicha}"
+    st.write(f"La categoría de CVR estimada es: {categoria_predicha}")
