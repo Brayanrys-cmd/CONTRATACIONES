@@ -259,4 +259,4 @@ if st.sidebar.button("Realizar Predicción"):
     # Mostrar la categoría con la mayor probabilidad
     prediccion = modelo.predict(nuevo_dato)
     categoria_predicha = nombres_categorias[prediccion[0]]
-    st.write(f"La categoría de que el postulante cumpla su meta es: {categoria_predicha}")
+    st.write(f"La categoría de cumplimiento estimada es: {categoria_predicha}")
