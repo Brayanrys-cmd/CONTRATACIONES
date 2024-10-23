@@ -253,7 +253,7 @@ if st.sidebar.button("Realizar Predicción"):
 
     # Crear un DataFrame para mostrar las probabilidades de cada clase
     probabilidades_df = pd.DataFrame(probabilidades_porcentaje, columns=[nombres_categorias[clase] for clase in modelo.classes_])
-    st.write("Probabilidades de cada categoría de CVR:")
+    st.write("Probabilidades de cada categoría de cumplimiento:")
     st.write(probabilidades_df)
 
     # Mostrar la categoría con la mayor probabilidad
