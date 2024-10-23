@@ -249,7 +249,7 @@ if st.sidebar.button("Realizar Predicción"):
     probabilidades = modelo.predict_proba(nuevo_dato)
 
     # Multiplicar las probabilidades por 100 para mostrarlas como porcentaje
-    probabilidades_porcentaje = probabilidades * 100
+    probabilidades_porcentaje = range(probabilidades * 100,2)
 
     # Crear un DataFrame para mostrar las probabilidades de cada clase
     probabilidades_df = pd.DataFrame(probabilidades_porcentaje, columns=[nombres_categorias[clase] for clase in modelo.classes_])
