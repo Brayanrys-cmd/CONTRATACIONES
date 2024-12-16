@@ -34,6 +34,7 @@ def transformar_datos(df):
     # Filtrar datos
     df = df[df['Rol'] == 'Comercial']
     df = df[df['EMPRESA'] == 'SELLERS']
+    df = df[df['PAIS'] == 'COLOMBIA']
 
     # Guardar variables originales antes de la transformación
     df_original = df.copy()
@@ -160,22 +161,25 @@ def preparar_datos_modelo(df):
 # Definir el modelo Random Forest
 def entrenar_modelo(X, y):
     param_grid = {
-    'C': [1],
-    'kernel': ['linear'],
-    'degree': [2],
-    'class_weight': ['balanced']
+    'bootstrap':[False],
+    'max_depth': [10], 
+    'max_features': ['sqrt'],
+    'min_samples_leaf': [1],
+    'min_samples_split': [5],
+    'n_estimators': [50]
+    
     }
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-    svm_model = SVC(random_state=42)
-    grid_search = GridSearchCV(estimator=svm_model, param_grid=param_grid, cv=5)
+    random_forest_model = RandomForestClassifier(random_state=42)
+    grid_search = GridSearchCV(estimator=random_forest_model, param_grid=param_grid, cv=5)
     grid_search.fit(X_train, y_train)
 
     best_params = grid_search.best_params_
-    best_svm_model = SVC(**best_params, random_state=42,probability=True)
-    best_svm_model.fit(X_train, y_train)
+    best_random_forest_model = RandomForestClassifier(**best_params, random_state=42)
+    best_random_forest_model.fit(X_train, y_train)
 
-    return best_svm_model, X_test, y_test
+    return best_random_forest_model, X_test, y_test
 
 # Cargar los datos y entrenar el modelo
 df = transformar_datos(df)[0]
@@ -183,7 +187,7 @@ X, y = preparar_datos_modelo(df)
 modelo, X_test, y_test = entrenar_modelo(X, y)
 
 # Aplicación Streamlit
-st.title("Predicción de Calidad de Nuevos Ingresos Sellers")
+st.title("Predicción de Calidad de Nuevos Ingresos Sellers Colombia")
 
 # Formulario para ingresar nuevos datos
 st.sidebar.header("Ingrese los datos del nuevo ingreso")
